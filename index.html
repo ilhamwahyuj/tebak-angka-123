@@ -3,81 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tebak Angka 123</title>
+    <title>✨ Tebak Angka 123 - Login ✨</title>
     <!-- Google Fonts + Font Awesome -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Hubungkan ke file CSS eksternal (jika dipisah) -->
+    <!-- CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<div class="game-container">
-    <h1>
-        <i class="fas fa-dice-d6"></i> 
-        TEBAK ANGKA 123 
-        <i class="fas fa-dice-d6"></i>
-    </h1>
-    <!-- Game Board -->
-    <div class="board-panel">
-        <div class="guess-area">
-            <div class="input-group">
-                <input type="text" id="guessInput" maxlength="3" placeholder="123" inputmode="numeric" pattern="[1-3]*">
-                <button class="btn" id="guessBtn" disabled><i class="fas fa-paper-plane"></i> Tebak</button>
+    <div class="container">
+        <!-- Bagian Auth (Login/Register) -->
+        <div id="authSection" class="card">
+            <h1><i class="fas fa-user-circle"></i> Selamat Datang <i class="fas fa-user-circle"></i></h1>
+            <div class="auth-tabs">
+                <button class="tab-btn active" id="tabLogin">Login</button>
+                <button class="tab-btn" id="tabRegister">Register</button>
             </div>
-            <div class="message" id="messageBox">
-                <i class="fas fa-lightbulb"></i> Tekan "Play" untuk mulai
+
+            <!-- Form Login -->
+            <div id="loginForm" class="auth-form active">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nama User:</label>
+                    <input type="text" id="loginName" placeholder="Masukkan nama Anda">
+                </div>
+                <button class="btn btn-primary" id="loginBtn"><i class="fas fa-sign-in-alt"></i> Login</button>
+            </div>
+
+            <!-- Form Register -->
+            <div id="registerForm" class="auth-form">
+                <div class="form-group">
+                    <label><i class="fas fa-user"></i> Nama User:</label>
+                    <input type="text" id="regName" placeholder="Nama unik">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-calendar-alt"></i> Umur User:</label>
+                    <input type="number" id="regAge" placeholder="Umur" min="1" max="120">
+                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-map-marker-alt"></i> Domisili User:</label>
+                    <input type="text" id="regCity" placeholder="Kota domisili">
+                </div>
+                <button class="btn btn-success" id="registerBtn"><i class="fas fa-user-plus"></i> Daftar</button>
+            </div>
+
+            <!-- User List -->
+            <h2><i class="fas fa-list"></i> Daftar Pengguna</h2>
+            <table class="user-table" id="userTable">
+                <thead>
+                    <tr><th>Nama</th><th>Umur</th><th>Domisili</th></tr>
+                </thead>
+                <tbody id="userListBody">
+                    <!-- Diisi lewat JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Bagian Game (muncul setelah login) -->
+        <div id="gameSection" class="card hidden">
+            <div class="logout-area">
+                <span class="welcome-message" id="welcomeUser"></span>
+                <button class="btn btn-danger" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+            </div>
+            <h1><i class="fas fa-dice-d6"></i> TEBAK ANGKA 123 <i class="fas fa-dice-d6"></i></h1>
+            <!-- Game Board -->
+            <div class="board-panel">
+                <div class="guess-area">
+                    <div class="input-group">
+                        <input type="text" id="guessInput" maxlength="3" placeholder="123" inputmode="numeric" pattern="[1-3]*">
+                        <button class="btn" id="guessBtn" disabled><i class="fas fa-paper-plane"></i> Tebak</button>
+                    </div>
+                    <div class="message" id="messageBox">
+                        <i class="fas fa-lightbulb"></i> Tekan "Play" untuk mulai
+                    </div>
+                </div>
+            </div>
+            <!-- Tombol Play -->
+            <div style="display: flex; justify-content: center;">
+                <button class="btn btn-primary" id="playBtn" style="font-size: 1.8rem; padding: 1rem 3.5rem;">
+                    <i class="fas fa-play"></i> PLAY
+                </button>
+            </div>
+            <!-- Local Stats -->
+            <div class="stats-row">
+                <div class="stat-card">
+                    <div class="stat-label"><i class="fas fa-trophy"></i> Berhasil ditebak</div>
+                    <div class="stat-number" id="totalCorrectDisplay">0</div>
+                    <div class="small-note">seumur hidup</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label"><i class="fas fa-skull-crossbones"></i> Salah terbanyak</div>
+                    <div class="stat-number" id="maxWrongDisplay">0</div>
+                    <div class="small-note">dalam 1 game</div>
+                </div>
+            </div>
+            <!-- Game Session Stats -->
+            <div class="session-stats">
+                <div class="session-item"><i class="fas fa-times-circle" style="color: #ff9e8f;"></i> Salah session ini</div>
+                <div class="session-value" id="wrongCountDisplay">0</div>
+            </div>
+            <!-- Tombol reset data -->
+            <div class="footer-actions">
+                <button class="btn btn-danger" id="resetStatsBtn"><i class="fas fa-trash-alt"></i> Hapus semua data</button>
+            </div>
+            <!-- Cara bermain -->
+            <div class="rule-box">
+                <h3><i class="fas fa-question-circle" style="color: #f5d371;"></i> Cara bermain</h3>
+                <ul>
+                    <li><i class="fa-regular fa-circle-check"></i> Kombinasi rahasia terdiri dari angka <strong>1, 2, 3</strong> (misal: 231, 123, 312).</li>
+                    <li><i class="fa-regular fa-circle-check"></i> Tepat 3 karakter, tidak ada angka berulang (bukan "112" atau "333").</li>
+                    <li><i class="fa-regular fa-circle-exclamation"></i> Setiap tebakan salah akan menambah hitungan sesi.</li>
+                    <li><i class="fa-regular fa-circle-exclamation"></i> Jika berhasil menebak, total kemenangan bertambah & rekor salah diperbarui.</li>
+                    <li><i class="fa-regular fa-sparkle"></i> Tekan <strong>PLAY</strong> untuk memulai/mengacak angka rahasia baru.</li>
+                </ul>
             </div>
         </div>
     </div>
 
-    <!-- Tombol Play -->
-    <div style="display: flex; justify-content: center;">
-        <button class="btn btn-primary" id="playBtn" style="font-size: 1.8rem; padding: 1rem 3.5rem;">
-            <i class="fas fa-play"></i> PLAY
-        </button>
-    </div>
-
-    <!-- Local Stats -->
-    <div class="stats-row">
-        <div class="stat-card">
-            <div class="stat-label"><i class="fas fa-trophy"></i> Berhasil ditebak</div>
-            <div class="stat-number" id="totalCorrectDisplay">0</div>
-            <div class="small-note">seumur hidup</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-label"><i class="fas fa-skull-crossbones"></i> Salah terbanyak</div>
-            <div class="stat-number" id="maxWrongDisplay">0</div>
-            <div class="small-note">dalam 1 game</div>
-        </div>
-    </div>
-
-    <!-- Game Session Stats -->
-    <div class="session-stats">
-        <div class="session-item"><i class="fas fa-times-circle" style="color: #ff9e8f;"></i> Salah session ini</div>
-        <div class="session-value" id="wrongCountDisplay">0</div>
-    </div>
-
-    <!-- Tombol reset data -->
-    <div class="footer-actions">
-        <button class="btn btn-danger" id="resetStatsBtn"><i class="fas fa-trash-alt"></i> Hapus semua data</button>
-    </div>
-
-    <!-- Cara bermain -->
-    <div class="rule-box">
-        <h3><i class="fas fa-question-circle" style="color: #f5d371;"></i> Cara bermain</h3>
-        <ul>
-            <li><i class="fa-regular fa-circle-check"></i> Kombinasi rahasia terdiri dari angka <strong>1, 2, 3</strong> (misal: 231, 123, 312).</li>
-            <li><i class="fa-regular fa-circle-check"></i> Tepat 3 karakter, tidak ada angka berulang (bukan "112" atau "333").</li>
-            <li><i class="fa-regular fa-circle-exclamation"></i> Setiap tebakan salah akan menambah hitungan sesi.</li>
-            <li><i class="fa-regular fa-circle-exclamation"></i> Jika berhasil menebak, total kemenangan bertambah & rekor salah diperbarui.</li>
-            <li><i class="fa-regular fa-sparkle"></i> Tekan <strong>PLAY</strong> untuk memulai/mengacak angka rahasia baru.</li>
-        </ul>
-    </div>
-</div>
-
-<!-- Hubungkan ke file JavaScript eksternal (jika dipisah) -->
-<script src="script.js"></script>
+    <!-- JavaScript Eksternal -->
+    <script src="script.js"></script>
 </body>
 </html>
