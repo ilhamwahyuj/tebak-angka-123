@@ -2,7 +2,8 @@
 
 Sebuah game tebak angka sederhana berbasis web yang dilengkapi dengan sistem registrasi dan login pengguna. Data pengguna dan statistik game disimpan di `localStorage` browser, sehingga tidak memerlukan backend server.
 
-![Preview](preview.png) *[Screenshot bisa ditambahkan nanti]*
+![Preview](preview.png) 
+*[Screenshot bisa ditambahkan nanti]*
 
 ## Fitur Utama
 
