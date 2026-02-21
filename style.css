@@ -1,3 +1,4 @@
+/* ========== UMUM ========== */
 * {
     margin: 0;
     padding: 0;
@@ -14,40 +15,196 @@ body {
     padding: 1.5rem;
 }
 
-.game-container {
-    max-width: 780px;
+.container {
+    max-width: 900px;
     width: 100%;
+}
+
+.card {
     background: rgba(255,255,255,0.1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 2px solid rgba(255,255,255,0.2);
     border-radius: 42px;
     box-shadow: 0 25px 50px -8px rgba(0,0,0,0.4), inset 0 2px 4px rgba(255,255,255,0.2);
-    padding: 2rem 2rem 2.5rem;
+    padding: 2rem;
     color: #f0f4fa;
     transition: all 0.3s ease;
 }
 
-h1 {
-    font-size: 2.4rem;
+h1, h2 {
     font-weight: 700;
     text-align: center;
     letter-spacing: 2px;
-    word-break: break-word;
     text-shadow: 3px 3px 0 #1a2632;
-    margin-bottom: 0.25rem;
+    margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
 }
 
-h1 i {
-    font-size: 2.2rem;
+h1 i, h2 i {
     color: #ffe083;
     filter: drop-shadow(0 4px 4px #00000050);
 }
 
+/* ========== BUTTON ========== */
+.btn {
+    background: #fee7b0;
+    border: none;
+    border-radius: 60px;
+    padding: 0.8rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #1e2b3a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 0 #b38b5a, 0 8px 16px #00000030;
+    transition: 0.1s linear;
+    border: 1px solid #ffffdd;
+    transform: translateY(0);
+}
+
+.btn:active {
+    box-shadow: 0 2px 0 #b38b5a;
+    transform: translateY(4px);
+}
+
+.btn-primary {
+    background: #a0d6ff;
+    box-shadow: 0 6px 0 #4f7aa6;
+    color: #0f283b;
+}
+
+.btn-danger {
+    background: #ffb0a0;
+    box-shadow: 0 6px 0 #a86454;
+    color: #2f1e1a;
+}
+
+.btn-success {
+    background: #b0e5b0;
+    box-shadow: 0 6px 0 #5f8b5f;
+    color: #1d3b1d;
+}
+
+/* ========== FORM & INPUT ========== */
+input, select {
+    background: #17212b;
+    border: 2px solid #3e5a6f;
+    border-radius: 40px;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.1rem;
+    color: #f2e9c7;
+    outline: none;
+    width: 100%;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #ffb86b;
+    background: #1e2d3b;
+    box-shadow: 0 0 10px #f5b04280;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.tab-btn {
+    background: transparent;
+    border: 2px solid #ffffff60;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.tab-btn.active {
+    background: #ffe083;
+    border-color: #ffe083;
+    color: #1e2b3a;
+}
+
+.auth-form {
+    display: none;
+    flex-direction: column;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.auth-form.active {
+    display: flex;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-left: 0.5rem;
+}
+
+/* ========== TABEL USER ========== */
+.user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1.5rem;
+    background: #1f313eb0;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.user-table th {
+    background: #2e4a5c;
+    padding: 12px;
+    font-weight: 600;
+}
+
+.user-table td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ffffff30;
+}
+
+.user-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* ========== LOGOUT AREA ========== */
+.logout-area {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.welcome-message {
+    font-size: 1.3rem;
+    background: #233240c9;
+    padding: 0.5rem 1.5rem;
+    border-radius: 40px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ========== GAME STYLES ========== */
 .board-panel {
     background: #233240c9;
     border-radius: 32px;
@@ -85,7 +242,6 @@ h1 i {
     letter-spacing: 6px;
     caret-color: #ffe083;
     outline: none;
-    transition: 0.25s;
     box-shadow: 0 4px 0 #0f171f;
 }
 
@@ -102,47 +258,20 @@ h1 i {
     cursor: not-allowed;
 }
 
-.btn {
-    background: #fee7b0;
-    border: none;
-    border-radius: 60px;
+.message {
+    background: #182d3b;
+    border-radius: 40px;
     padding: 0.8rem 2rem;
-    font-size: 1.4rem;
-    font-weight: 700;
-    color: #1e2b3a;
-    display: inline-flex;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    color: #e7dbb5;
+    border: 1px solid #f1cf7a;
+    min-height: 4rem;
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    box-shadow: 0 8px 0 #b38b5a, 0 10px 20px #00000030;
-    transition: 0.1s linear;
-    border: 1px solid #ffffdd;
-    transform: translateY(0);
-}
-
-.btn:active {
-    box-shadow: 0 2px 0 #b38b5a;
-    transform: translateY(6px);
-}
-
-.btn:disabled {
-    opacity: 0.5;
-    box-shadow: 0 5px 0 #7f6b52;
-    transform: translateY(3px);
-    pointer-events: none;
-}
-
-.btn-primary {
-    background: #a0d6ff;
-    box-shadow: 0 8px 0 #4f7aa6;
-    color: #0f283b;
-}
-
-.btn-danger {
-    background: #ffb0a0;
-    box-shadow: 0 8px 0 #a86454;
-    color: #2f1e1a;
+    gap: 8px;
 }
 
 .stats-row {
@@ -228,61 +357,12 @@ h1 i {
     margin-top: 1.8rem;
 }
 
-.rule-box h3 {
-    font-size: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 0.8rem;
-}
-
-.rule-box ul {
-    list-style: none;
-    padding-left: 0.5rem;
-}
-
-.rule-box li {
-    margin: 0.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.1rem;
-}
-
-.rule-box i.fa-circle-check {
-    color: #7be07b;
-}
-
-.rule-box i.fa-circle-exclamation {
-    color: #f9a66c;
-}
-
 .footer-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     margin-top: 1.5rem;
     flex-wrap: wrap;
-}
-
-.message {
-    background: #182d3b;
-    border-radius: 40px;
-    padding: 0.8rem 2rem;
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-align: center;
-    color: #e7dbb5;
-    border: 1px solid #f1cf7a;
-    min-height: 4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.fa-sparkle {
-    color: #ffdb8e;
 }
 
 hr {
